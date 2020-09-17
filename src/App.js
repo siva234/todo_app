@@ -1,49 +1,78 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './App.css';
 
-import { Button, FormControl, Input, InputLabel } from '@material-ui/core';
-import Todo from './Todo';
-import db from './firebase';
-import firebase from "firebase";
+import { Tab, Tabs, Typography, Box, AppBar } from '@material-ui/core';
+import PropTypes from 'prop-types';
+import { useTheme } from '@material-ui/core/styles';
+import TodoMain from './pages/TodoMain/TodoMain';
+
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`full-width-tabpanel-${index}`}
+      aria-labelledby={`full-width-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box p={3}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired,
+};
 
 function App() {
-  const [todos, setTodos] = useState([]);
-  const [input, setInput] = useState('');
+  const theme = useTheme();
+  const [value, setValue] = React.useState(0);
 
-  useEffect(() => {
-    db.collection('todos').orderBy('timestamp', 'desc').onSnapshot(snapshot =>{
-      setTodos(snapshot.docs.map(doc => ({id: doc.id, todo: doc.data().todo})))
-    })
-  }, []);
+  
+function a11yProps(index) {
+  return {
+    id: `full-width-tab-${index}`,
+    'aria-controls': `full-width-tabpanel-${index}`,
+  };
+}
 
-  const addTodo = (event) => {
-    event.preventDefault();
-    db.collection('todos').add({
-      todo: input,
-      timestamp: firebase.firestore.FieldValue.serverTimestamp()
-    })
-    setInput('');
-  }
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
   return (
     <div className="App">
-      <h1>ToDo List</h1>
-      <form>
-        <FormControl>
-          <InputLabel>Write a Todo:</InputLabel>
-          <Input value={input} onChange={event => setInput(event.target.value)} />
-        </FormControl>
-        <Button disabled={!input} type="submit" onClick={addTodo} variant="contained" color="primary">
-          Add Todo
-        </Button>
-      </form>
-
-      <ul>
-        {todos.map(todo => (
-          <Todo todo={todo}/>
-        ))}
-      </ul>
-
+            <AppBar position="static" color="default">
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          indicatorColor="primary"
+          textColor="primary"
+          variant="fullWidth"
+          aria-label="full width tabs example"
+        >
+          <Tab label="About me" {...a11yProps(0)} />
+          <Tab label="Todo App" {...a11yProps(1)} />
+          <Tab label="Video" {...a11yProps(2)} />
+        </Tabs>
+      </AppBar>
+        <TabPanel value={value} index={0} dir={theme.direction}>
+          About Me         
+        </TabPanel>
+        <TabPanel value={value} index={1} dir={theme.direction}>
+          <TodoMain />
+        </TabPanel>
+        <TabPanel value={value} index={2} dir={theme.direction}>
+          Item Three
+        </TabPanel>
     </div>
   );
 }

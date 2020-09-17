@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import './Todo.css';
+import styles from './Todo.module.css';
 
-import db from './firebase';
+import db from '../firebase';
 import firebase from "firebase";
 import { Delete, Edit } from '@material-ui/icons';
 import { Button, List, ListItem, ListItemAvatar, ListItemText, Modal } from '@material-ui/core';
@@ -43,14 +43,16 @@ function Todo(props) {
                 <Button disabled={!input} onClick={updateTodo} variant="contained" color="primary">Update ToDo</Button>
             </div>
         </Modal>
-        <List>
-            <ListItem>
+        <List className={styles.todoListItem}>
+            <ListItem className={styles.todoListItemContent}>
                 <ListItemAvatar>
                 </ListItemAvatar>
                 <ListItemText primary={props.todo.todo} secondary="--END--" />
             </ListItem>
-            <Edit onClick={e => setOpen(true)} />
-            <Delete onClick={event => db.collection('todos').doc(props.todo.id).delete()} />
+            <div className={styles.todoButtons}>
+                <Edit onClick={e => setOpen(true)} />
+                <Delete onClick={event => db.collection('todos').doc(props.todo.id).delete()} />
+            </div>
         </List>
         </>
     )

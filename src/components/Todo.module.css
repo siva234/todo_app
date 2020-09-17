@@ -1,0 +1,15 @@
+.todoListItem{
+    border: 1px solid black;
+    margin-top: 30px !important;
+    padding: 100px;
+    background-color: burlywood;
+    border-radius: 15px;
+    box-shadow: 0 5px 2px -2px gray;
+}
+.todoListItemContent{
+    text-emphasis: 1.5em;
+}
+.todoButtons{
+    width: 80px;
+    margin-left: 70%;
+}
