@@ -5,6 +5,7 @@ import { Tab, Tabs, Typography, Box, AppBar } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import { useTheme } from '@material-ui/core/styles';
 import TodoMain from './pages/TodoMain/TodoMain';
+import Aboutme from './pages/AboutMe/Aboutme';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -65,7 +66,7 @@ function a11yProps(index) {
         </Tabs>
       </AppBar>
         <TabPanel value={value} index={0} dir={theme.direction}>
-          About Me         
+          <Aboutme />
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
           <TodoMain />

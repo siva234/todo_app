@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styles from './TodoMain.module.css';
 
 import { Button, FormControl, Input, InputLabel } from '@material-ui/core';
-import Todo from '../../components/Todo';
+import Todo from '../../components/Todo/Todo';
 import db from '../../firebase';
 import firebase from "firebase";
 

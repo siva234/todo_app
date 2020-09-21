@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styles from './Todo.module.css';
 
-import db from '../firebase';
+import db from '../../firebase';
 import firebase from "firebase";
 import { Delete, Edit } from '@material-ui/icons';
 import { Button, List, ListItem, ListItemAvatar, ListItemText, Modal } from '@material-ui/core';
