@@ -3,7 +3,6 @@ import styles from "./CVcard.module.css";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import Card from "@material-ui/core/Card";
-import CardMedia from "@material-ui/core/CardMedia";
 import Collapse from "@material-ui/core/Collapse";
 import IconButton from "@material-ui/core/IconButton";
 import CardContent from '@material-ui/core/CardContent';
@@ -38,7 +37,7 @@ function CVcard(props) {
   return (
     <Card className={classes.root}>
       <CardContent>
-          <img src={CV1} />
+          <img alt="" src={CV1} />
       </CardContent>
       <IconButton
           className={clsx(classes.expand, {
@@ -52,7 +51,7 @@ function CVcard(props) {
         </IconButton>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
        <CardContent>
-          <img src={CV2} />
+          <img alt="" src={CV2} />
       </CardContent>
       </Collapse>
     </Card>

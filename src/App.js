@@ -5,6 +5,7 @@ import { Tab, Tabs, Typography, Box, AppBar } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import { useTheme } from '@material-ui/core/styles';
 import TodoMain from './pages/TodoMain/TodoMain';
+import Social from './pages/Social/Social';
 import Aboutme from './pages/AboutMe/Aboutme';
 
 function TabPanel(props) {
@@ -51,20 +52,22 @@ function a11yProps(index) {
 
   return (
     <div className="App">
-            <AppBar position="static" color="default">
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          indicatorColor="primary"
-          textColor="primary"
-          variant="fullWidth"
-          aria-label="full width tabs example"
-        >
-          <Tab label="About me" {...a11yProps(0)} />
-          <Tab label="Todo App" {...a11yProps(1)} />
-          <Tab label="Video" {...a11yProps(2)} />
-        </Tabs>
-      </AppBar>
+      <div className="appHeader">
+        <AppBar position="static" color="default">
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            indicatorColor="primary"
+            textColor="primary"
+            variant="fullWidth"
+            aria-label="full width tabs example"
+          >
+            <Tab label="About me" {...a11yProps(0)} />
+            <Tab label="Todo App" {...a11yProps(1)} />
+            <Tab label="Social" {...a11yProps(2)} />
+          </Tabs>
+        </AppBar>
+      </div>
         <TabPanel value={value} index={0} dir={theme.direction}>
           <Aboutme />
         </TabPanel>
@@ -72,7 +75,7 @@ function a11yProps(index) {
           <TodoMain />
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-          Item Three
+          <Social />
         </TabPanel>
     </div>
   );
