@@ -3,7 +3,7 @@ import styles from './Social.module.css';
 
 import { Button, FormControl, Input, InputLabel } from '@material-ui/core';
 import Post from '../../components/Post/Post';
-import db from '../../firebase';
+import { db } from '../../firebase';
 import firebase from "firebase";
 
 function Social() {

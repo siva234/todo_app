@@ -4,6 +4,7 @@ import './App.css';
 import { Tab, Tabs, Typography, Box, AppBar } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import { useTheme } from '@material-ui/core/styles';
+import Login from './components/Login/Login';
 import TodoMain from './pages/TodoMain/TodoMain';
 import Social from './pages/Social/Social';
 import Aboutme from './pages/AboutMe/Aboutme';
@@ -53,6 +54,7 @@ function a11yProps(index) {
   return (
     <div className="App">
       <div className="appHeader">
+        <Login />
         <AppBar position="static" color="default">
           <Tabs
             value={value}
@@ -65,6 +67,7 @@ function a11yProps(index) {
             <Tab label="About me" {...a11yProps(0)} />
             <Tab label="Todo App" {...a11yProps(1)} />
             <Tab label="Social" {...a11yProps(2)} />
+            <Tab label="Videos" {...a11yProps(3)} />
           </Tabs>
         </AppBar>
       </div>
@@ -76,6 +79,9 @@ function a11yProps(index) {
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
           <Social />
+        </TabPanel>
+        <TabPanel value={value} index={3} dir={theme.direction}>
+          Vidoes
         </TabPanel>
     </div>
   );

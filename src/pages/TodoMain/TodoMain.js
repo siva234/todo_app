@@ -3,12 +3,13 @@ import styles from './TodoMain.module.css';
 
 import { Button, FormControl, Input, InputLabel } from '@material-ui/core';
 import Todo from '../../components/Todo/Todo';
-import db from '../../firebase';
+import { db, auth } from '../../firebase';
 import firebase from "firebase";
 
 function TodoMain() {
   const [todos, setTodos] = useState([]);
   const [input, setInput] = useState('');
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     db.collection('todos').orderBy('timestamp', 'desc').onSnapshot(snapshot =>{
@@ -16,10 +17,27 @@ function TodoMain() {
     })
   }, []);
 
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((authUser) => {
+      if(authUser){
+        //Logged in
+        setUser(authUser);
+      } else {
+        //logged out
+        setUser(null);
+      }
+    })
+    return () => {
+      //cleanup actions
+      unsubscribe();
+    }
+  }, [user]);
+
   const addTodo = (event) => {
     event.preventDefault();
     db.collection('todos').add({
       todo: input,
+      user: "siva",
       timestamp: firebase.firestore.FieldValue.serverTimestamp()
     })
     setInput('');
@@ -33,7 +51,7 @@ function TodoMain() {
           <InputLabel>Write a Todo:</InputLabel>
           <Input value={input} onChange={event => setInput(event.target.value)} />
         </FormControl>
-        <Button disabled={!input} type="submit" onClick={addTodo} variant="contained" color="primary">
+        <Button disabled={!input || !user} type="submit" onClick={addTodo} variant="contained" color="primary">
           Add Todo
         </Button>
       </form>
