@@ -37,7 +37,7 @@ function TodoMain() {
     event.preventDefault();
     db.collection('todos').add({
       todo: input,
-      user: "siva",
+      user: user.displayName,
       timestamp: firebase.firestore.FieldValue.serverTimestamp()
     })
     setInput('');

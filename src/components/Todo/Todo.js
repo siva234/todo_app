@@ -64,7 +64,7 @@ function Todo(props) {
             <ListItem className={styles.todoListItemContent}>
                 <ListItemAvatar>
                 </ListItemAvatar>
-                <ListItemText primary={props.todo.todo} secondary="--END--" />
+                <ListItemText primary={props.todo.todo} secondary={props.todo.user} />
             </ListItem>
             {user? 
             (

@@ -1,0 +1,15 @@
+.createPostContainer{
+    display: flex;
+    max-width: 400px;
+    flex-direction: column;
+    border: 1px solid lightslategrey;
+    padding: 10px;
+    position: fixed;
+    top: 100px;
+    right: 10px;
+}
+
+.uploadButton{
+    border: 1px solid black;
+
+}
