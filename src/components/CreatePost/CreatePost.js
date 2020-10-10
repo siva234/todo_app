@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styles from './CreatePost.module.css'
 
 import { Button, Input } from '@material-ui/core';
-import { db, auth , storage } from '../../firebase';
+import { db, storage } from '../../firebase';
 import firebase from "firebase";
 
 function CreatePost({username}) {
@@ -52,7 +52,7 @@ function CreatePost({username}) {
 
     return (
         <div className={styles.createPostContainer}>
-            <progress value={progress} max="100" />
+            <progress className={styles.postProgressBar} value={progress} max="100" />
             <Input type="textArea" placeholder="Enter a Caption..." onChange={event => setCaption(event.target.value)} value={caption} />
             <Input type="file" onChange={handleChange} />
             <Button className={styles.uploadButton} onClick={handleUpload}>Create Post</Button>

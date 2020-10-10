@@ -7,7 +7,7 @@ function Aboutme() {
 
 
   return (
-    <div className={styles.todoMain}>
+    <div className={styles.AboutmeMain}>
         About Me
         <CVcard />
     </div>

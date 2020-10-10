@@ -24,7 +24,7 @@ function getModalStyle() {
       padding: theme.spacing(2, 4, 3),
     },
   }));
-function Login() {
+function Login({parentCallback}) {
     const classes = useStyles();
     const [modalStyle] = React.useState(getModalStyle);
     const [open, setOpen] = useState(false);
@@ -39,11 +39,12 @@ function Login() {
         if(authUser){
           //Logged in
           console.log(authUser);
-          setUser(authUser);
+          setUser(authUser);         
         } else {
           //logged out
           setUser(null);
         }
+        parentCallback(authUser);
       })
       return () => {
         //cleanup actions

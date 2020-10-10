@@ -18,31 +18,14 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-function Todo(props) {
+function Todo({todo, user}) {
     const classes = useStyles();
     const [open, setOpen] = useState(false);
     const [input, setInput] = useState('');
-    const [user, setUser] = useState(null);
-
-    useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged((authUser) => {
-          if(authUser){
-            //Logged in
-            setUser(authUser);
-          } else {
-            //logged out
-            setUser(null);
-          }
-        })
-        return () => {
-          //cleanup actions
-          unsubscribe();
-        }
-      }, [user]);
 
     const updateTodo = () => {
-        db.collection('todos').doc(props.todo.id).set({
-            todo: input,
+        db.collection('todos').doc(todo.id).set({
+            text: input,
             timestamp: firebase.firestore.FieldValue.serverTimestamp()
         }, {merge: true })
         setOpen(false);
@@ -56,21 +39,21 @@ function Todo(props) {
         >
             <div className={classes.paper}>
                 <h1>Edit window</h1>
-                <input placeholder={props.todo.todo} value={input} onChange={event => setInput(event.target.value)} />
-                <Button disabled={!input} onClick={updateTodo} variant="contained" color="primary">Update ToDo</Button>
+                <input placeholder={todo.todos.text} value={input} onChange={event => setInput(event.target.value)} />
+                <Button disabled={!input } onClick={updateTodo} variant="contained" color="primary">Update ToDo</Button>
             </div>
         </Modal>
         <List className={styles.todoListItem}>
             <ListItem className={styles.todoListItemContent}>
                 <ListItemAvatar>
                 </ListItemAvatar>
-                <ListItemText primary={props.todo.todo} secondary={props.todo.user} />
+                <ListItemText primary={todo.todos.text} secondary={<p className={styles.todoUser}>---{todo.todos.user}</p>} />
             </ListItem>
-            {user? 
+            {!(user.displayName!=todo.todos.user)? 
             (
                 <div className={styles.todoButtons}>
                 <Edit onClick={e => setOpen(true)} />
-                <Delete onClick={event => db.collection('todos').doc(props.todo.id).delete()} />
+                <Delete onClick={event => db.collection('todos').doc(todo.id).delete()} />
                 </div>
             ):(
                 <div className={styles.todoButtons}>

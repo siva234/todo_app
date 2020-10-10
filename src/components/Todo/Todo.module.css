@@ -9,6 +9,9 @@
 .todoListItemContent{
     text-emphasis: 1.5em;
 }
+.todoUser{
+    text-align: right;
+}
 .todoButtons{
     width: 80px;
     margin-left: 70%;
