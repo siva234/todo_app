@@ -1,6 +1,5 @@
 import React , {useState, useEffect} from 'react';
 import './App.css';
-import styles from './components/Login/Login.module.css';
 
 import { Tab, Tabs, Typography, Box, AppBar } from '@material-ui/core';
 import PropTypes from 'prop-types';
@@ -146,7 +145,7 @@ function a11yProps(index) {
             <Modal open={open} onClose={handleClose} >
                 <div style={modalStyle} className={classes.paper}>
                     <h2>Login</h2>
-                    <form className={styles.signupForm}>
+                    <form className="signupForm">
                       <Input
                         type="text"
                         placeholder="Enter Username"
@@ -172,7 +171,7 @@ function a11yProps(index) {
             <Modal open={openLogIn} onClose={() => setOpenLogIn(false)} >
                 <div style={modalStyle} className={classes.paper}>
                     <h2>Login</h2>
-                    <form className={styles.signupForm}>
+                    <form className="signupForm">
                       <Input
                         type="text"
                         placeholder="Enter Email"
@@ -190,11 +189,14 @@ function a11yProps(index) {
                 </div>
             </Modal>
             {user?(
-              <Button onClick={() => auth.signOut()}>Logout</Button>
+                <div className="btnLogOut">
+                  <Button onClick={() => auth.signOut()}>Logout</Button>
+                </div>
               ): (
                 <div className="loginContainer">
-                  <Button onClick={() => setOpenLogIn(true)}>Login</Button>
-                  <Button onClick={() => setOpen(true)}>SignUp</Button>
+                  <Button className="btnLogIn" onClick={() => setOpenLogIn(true)}>Login</Button>
+                  <Button className="btnSignup" onClick={() => setOpen(true)}>SignUp</Button>                  
+                  <h6>You need to be logged in to interact with the Apps</h6>
                 </div>
             )}
         </div>

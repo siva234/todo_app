@@ -40,7 +40,7 @@ function Post({ postId, user, username, caption, imageUrl }) {
       };
 
     return (
-        <div className={styles.post}>
+        <center><div className={styles.post}>
             <div className={styles.postHeader}>
                 <Avatar
                     className={styles.postAvatar}
@@ -58,20 +58,24 @@ function Post({ postId, user, username, caption, imageUrl }) {
                     </p>
                 ))}                
             </div>
-            <form className={styles.commentBox}>
-                <Input className={styles.commentInput}
-                        type="text"
-                        placeholder="Add a Comment..."
-                        value={comment}
-                        onChange={(e) => setComment(e.target.value)}
-                />
-                <button className={styles.commentButton}
-                        disabled={!comment}
-                        type="submit"
-                        onClick={postComment}
-                >Post</button>
-            </form>            
-        </div>
+            {user ?
+                (<form className={styles.commentBox}>
+                    <Input className={styles.commentInput}
+                            type="text"
+                            placeholder="Add a Comment..."
+                            value={comment}
+                            onChange={(e) => setComment(e.target.value)}
+                    />
+                    <button className={styles.commentButton}
+                            disabled={!comment}
+                            type="submit"
+                            onClick={postComment}
+                    >Post</button>
+                </form>):(
+                    <div></div>
+                )
+            } 
+        </div></center>
     )
 }
 

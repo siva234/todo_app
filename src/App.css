@@ -1,10 +1,17 @@
 *{
   margin: 0px;
 }
+* > Button{
+  border: 1px solid lightgray;
+}
 .App {
   text-align: center;
   background-color: #fafafa;
   height: 100vh;
+}
+.signupForm{
+  display: flex;
+  flex-direction: column;
 }
 .appHeader {
   display: flex;
@@ -15,7 +22,6 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
 }
-
-.App-link {
-  color: #61dafb;
+.loginContainer{
+  margin: 5px;
 }
